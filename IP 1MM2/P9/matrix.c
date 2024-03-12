@@ -12,15 +12,10 @@
 
 int main()
 {
-    int matrix[3][3], matrixTrans[3][3], cont = 1, determinante;
+    int matrix[3][3]={{1,2,3},{4,4,6},{7,8,9}}, matrixTrans[3][3], matrixA[3][3], cont = 1, determinante;
+    float matrixI[3][3];
+    float factor;
 
-    for (int f = 0; f < 3; f++)
-    {
-        for (int c = 0; c < 3; c++)
-        {
-            matrix[f][c] = cont++;
-        }
-    }
 
     // Determinante
     determinante = (matrix[0][0] * matrix[1][1] * matrix[2][2]) +
@@ -30,7 +25,13 @@ int main()
                    (matrix[2][1] * matrix[1][2] * matrix[0][0]) -
                    (matrix[2][2] * matrix[1][0] * matrix[0][1]);
 
-    printf("%i\n", determinante);
+    if (determinante == 0)
+    {
+        printf("Lo siento, esa matriz no tiene inversa :'(\n");
+        return 1;
+    }
+
+    factor = 1.0f / (float)determinante;
 
     // Traspuesta
     for (int f = 0; f < 3; f++)
@@ -41,24 +42,35 @@ int main()
         }
     }
 
-    for (int fila = 0; fila < 3; fila++)
+    // Adjunta
+    matrixA[0][0] = +1 * ((matrixTrans[1][1] * matrixTrans[2][2] - matrixTrans[1][2] * matrixTrans[2][1]));
+    matrixA[0][1] = -1 * ((matrixTrans[1][0] * matrixTrans[2][2] - matrixTrans[2][0] * matrixTrans[1][2]));
+    matrixA[0][2] = +1 * ((matrixTrans[1][0] * matrixTrans[2][1] - matrixTrans[2][0] * matrixTrans[1][1]));
+    matrixA[1][0] = -1 * ((matrixTrans[0][1] * matrixTrans[2][2] - matrixTrans[0][2] * matrixTrans[2][1]));
+    matrixA[1][1] = +1 * ((matrixTrans[0][0] * matrixTrans[2][2] - matrixTrans[0][2] * matrixTrans[2][0]));
+    matrixA[1][2] = -1 * ((matrixTrans[0][0] * matrixTrans[2][1] - matrixTrans[0][1] * matrixTrans[2][0]));
+    matrixA[2][0] = +1 * ((matrixTrans[0][1] * matrixTrans[1][2] - matrixTrans[0][2] * matrixTrans[1][1]));
+    matrixA[2][1] = -1 * ((matrixTrans[0][0] * matrixTrans[1][2] - matrixTrans[1][0] * matrixTrans[0][2]));
+    matrixA[2][2] = +1 * ((matrixTrans[0][0] * matrixTrans[1][1] - matrixTrans[0][1] * matrixTrans[1][0]));
+
+    for (int f = 0; f < 3; f++)
     {
-        for (int columna = 0; columna < 3; columna++)
+        for (int c = 0; c < 3; c++)
         {
-            printf("%i ", matrix[fila][columna]);
+            matrixI[f][c] = (float)matrixA[f][c] * factor;
         }
-        printf("\n");
     }
-    printf("\n");
+
 
     for (int fila = 0; fila < 3; fila++)
     {
         for (int columna = 0; columna < 3; columna++)
         {
-            printf("%i ", matrixTrans[fila][columna]);
+            printf("%6.3f ", matrixI[fila][columna]);
         }
         printf("\n");
     }
 
+    
     return 0;
 }

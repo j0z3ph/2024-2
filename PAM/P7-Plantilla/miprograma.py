@@ -1,4 +1,4 @@
-from Ui_untitled import *
+from Ui_ventana import *
 from PyQt6.QtWidgets import QMainWindow
 import sys
 

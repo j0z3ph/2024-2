@@ -9,6 +9,7 @@
  *
  */
 #include <iostream>
+#include "tools.hpp"
 
 using namespace std;
 
@@ -31,6 +32,11 @@ public:
 
     Contacto(string nombre, string numero): nombre(nombre), numero(numero) {
         this->apodo = "Sin apodo";
+    }
+
+    // Destructor
+    ~Contacto() {
+        cout << "Me mori";
     }
 
     // Setters
@@ -72,6 +78,12 @@ void Contacto::funcion() {
 
 int main()
 {
+    string opciones[] = {"Agregar contacto", "Llamar contacto", "Editar contacto", "Buscar contacto", "Salir"};
+    int seleccion = showMenu(5, opciones, "Lista de contactos");
+
+    cout << seleccion;
+    return 0;
+
     Contacto contacto("Camilo", "Garmilos", "777"), contacto2("Leonardo", "Donatelo", "1234");
     Contacto c("Julio", "123");
     //Contacto lista_de_contactos[2];

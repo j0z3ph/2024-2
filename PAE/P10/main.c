@@ -1,5 +1,5 @@
 /**
- * @file main.c
+ * @file main.c 
  * @author Jose Luis Cruz (jlcruz@ipn.mx)
  * @brief Ejemplo de paso de parametros
  * @version 0.1
@@ -9,22 +9,24 @@
  *
  */
 #include <stdio.h>
+#include "operaciones.h"
+#include "tools.h"
 
-/**
- * @brief Suma dos numeros
- *
- * @param a Numero 1
- * @param b Numero 2
- * @return int La suma
- */
-int suma(int a, int b);
-
-
-int sumaRef(int *a, int *b);
 
 int main()
 {
     int a = 5, b = 8;
+    int seleccion;
+    char *opciones[] = {"Sumas", "Restas", "Multiplicaciones", "Divisiones", "Salir"};
+
+    seleccion = showMenu(5, opciones, "La Maizoro");
+
+    printf("%i", seleccion);
+
+    return 0;
+
+
+
     int res = sumaRef(&a, &b);
     //int res = suma(a, b);
 
@@ -32,15 +34,3 @@ int main()
     return 0;
 }
 
-int suma(int a, int b)
-{
-    a = 7;
-    b = 25;
-    return a + b;
-}
-
-int sumaRef(int *a, int *b) {
-    *a = 7;
-    *b = 25;
-    return *a + *b;
-}

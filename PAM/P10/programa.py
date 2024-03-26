@@ -14,7 +14,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def showDialog(self):
         dialogoLogin = DialogoLogin(self, Qt.WindowType.Dialog)
         resp = dialogoLogin.exec()
-        print(resp)
+        if resp == 1:
+            dialogoLogin.editUser.text()
+            dialogoLogin.editPass.text()
         
 class DialogoLogin(QDialog, Ui_Dialog):
     def __init__(self, parent: QWidget | None = ..., flags: Qt.WindowType = ...) -> None:

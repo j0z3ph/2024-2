@@ -33,6 +33,11 @@ public:
     {
         return Punto(p1.x + p2.x, p1.y + p2.y);
     }
+
+    friend ostream& operator <<(ostream &os, const Punto &p) {
+        os << "(" << p.x << ", " << p.y << ")";
+        return os;
+    }
 };
 
 int suma(int a, int b)
@@ -68,7 +73,7 @@ int main()
 
     Punto p3 = p1 + p2;
 
-    cout << p3.getX() << ", "<< p3.getY();
+    //cout << p3.getX() << ", "<< p3.getY();
     cout << p3;
 
     return 0;
